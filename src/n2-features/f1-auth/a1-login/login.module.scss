@@ -6,7 +6,9 @@
   width: 413px;
   height: 552px;
   border: 2px solid rgba(0, 0, 0, 0.25);
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 4px;
+  background-color: #FFFFFF;
   //margin-left: 434px;
   //margin-right: 433px;
   //margin-top: 120px;
@@ -23,6 +25,10 @@ h3 {
   height: 36px;
   margin-top: 24px;
   margin-bottom: 60px;
+}
+.forgotPass{
+  display: flex;
+  justify-content: right;
 }
 
 .rememberMe {
@@ -50,6 +56,8 @@ form {
   height: 48px;
   padding-bottom: 24px;
 }
+
+
 .signUp{
   color: #366EFF;
   margin-bottom: 38px;
