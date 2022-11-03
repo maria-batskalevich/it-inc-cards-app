@@ -12,7 +12,7 @@ const RootReducer = combineReducers({
 
 export const store = createStore(RootReducer, applyMiddleware(thunk))
 
-export type RootStateType = ReturnType<typeof RootReducer>
+export type RootState = ReturnType<typeof RootReducer>
 export type AppDispatch = typeof store.dispatch
 
 // @ts-ignore

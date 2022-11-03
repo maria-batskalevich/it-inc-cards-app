@@ -1,3 +1,6 @@
+import {setIsLoggedIn} from "../../n2-features/f1-auth/a1-login/auth-reducer";
+import {AppDispatch} from "../m2-bll/store";
+import {authAPI} from "../m3-dal/auth-api";
 
 const initialState = {
     isLoading: false,
@@ -37,7 +40,8 @@ export const appReducer = (state = initialState, action: AppReducerActionType): 
             return {
                 ...state, error: action.payload.error
             }
-        default: return state
+        default:
+            return state
     }
 }
 
@@ -52,3 +56,21 @@ export const setAppInfo = (info: string) => (
 
 export const setAppError = (error: string) => (
     {type: 'SET-APP-ERROR', payload: {error}} as const)
+
+// export const initializeApp = () => async (dispatch: ThunkDispatch<RootStateType, unknown, AppReducerActionType>) => {
+//     try {
+//         await dispatch(checkAuth)
+//         dispatch(setIsInitialized(true))
+//     } catch (e) {
+//         const error = e.response ? e.response.data.error : (e.message + ', more details in the console')
+//     }
+// }
+
+export const initializeApp = () => (dispatch: AppDispatch) => {
+    authAPI.auth()
+        .then((res) => {
+            dispatch(setIsLoggedIn(true))})
+        .finally(() => {
+        dispatch(setIsInitialized(true))
+    })
+}

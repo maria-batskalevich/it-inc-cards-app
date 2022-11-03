@@ -6,6 +6,7 @@ import {RecoveryPassword} from "../../../n2-features/f1-auth/a4-recoveryPassword
 import {NotFound} from "../../../n2-features/f1-auth/a5-404/404";
 import {NewPassword} from "../../../n2-features/f1-auth/a6-newPassword/NewPassword";
 import {Demonstration} from "../../../n2-features/f1-auth/a6-demonstration/Demonstration";
+import {Logout} from "../../../n2-features/f1-auth/a7-logout/logout";
 
 export const NOT_FOUND_ROUTE = '*';
 export const LOGIN_ROUTE = 'login';
@@ -16,6 +17,7 @@ export const NEW_PASS_ROUTE = 'newPass';
 export const PACKS_ROUTE = 'cardPacks';
 export const CARDS_ROUTE = 'cards';
 export const DEMONSTRATION_ROUTE = 'demonstration'
+export const LOGOUT_ROUTE = 'logout'
 
 export const publicRoutes = [
     {
@@ -41,6 +43,10 @@ export const publicRoutes = [
     {
         path: NEW_PASS_ROUTE,
         component: <NewPassword/>,
+    },
+    {
+        path: LOGOUT_ROUTE,
+        component: <Logout/>
     },
     // {
     //     path: PACKS_ROUTE,

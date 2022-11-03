@@ -8,6 +8,10 @@ export type LoginDataType = {
     password: string,
     rememberMe: boolean
 }
+export type LogoutResponse = {
+    info: string,
+    error: string
+}
 
 export type UserInfoResponseType = {
     _id: string,
@@ -15,6 +19,12 @@ export type UserInfoResponseType = {
     name: string,
     avatar?: string,
     publicCardPacksCount: number,
+    created: Date,
+    updated: Date,
+    isAdmin: boolean,
+    verified: boolean,
+    rememberMe: boolean,
+    error?: string,
 }
 
 export type ResponseType = {

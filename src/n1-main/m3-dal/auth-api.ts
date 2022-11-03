@@ -1,5 +1,5 @@
 import axios, {AxiosResponse} from 'axios';
-import {LoginDataType, UserInfoResponseType} from "./ApiResponseTypes";
+import {LoginDataType, LogoutResponse, UserInfoResponseType} from "./ApiResponseTypes";
 
 
 // const settings = {
@@ -33,7 +33,18 @@ const instance = axios.create({
     withCredentials: true,
 })
 
-export const API = {
-    login: (payload: LoginDataType) =>
-        instance.post<LoginDataType, AxiosResponse<UserInfoResponseType>>('auth/login', payload)
+export const authAPI = {
+    login (data: LoginDataType) {
+        return instance.post<LoginDataType, AxiosResponse<UserInfoResponseType>>('auth/login', data)
+    },
+
+    logout ()  {
+       return instance.delete<LogoutResponse>('auth/me')
+    },
+    auth () {
+        return instance.post<{}, AxiosResponse<UserInfoResponseType>>('auth/me')
+    }
 }
+
+
+
