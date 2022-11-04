@@ -1,5 +1,5 @@
-import {setAppError} from "../n1-main/m1-ui/app-reducer";
-import {AppDispatch} from "../n1-main/m2-bll/store";
+import {setAppError} from "../05-Store/reducers/app-reducer";
+import {AppDispatch} from "../05-Store/store";
 
 
 export const errorsHandler = (error: any, dispatch: AppDispatch) => {

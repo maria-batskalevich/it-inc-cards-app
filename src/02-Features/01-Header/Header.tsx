@@ -1,6 +1,6 @@
 import React from 'react';
 import {NavLink} from "react-router-dom";
-import {publicRoutes} from "../routes/AppRoutes";
+import {publicRoutes} from "../../06-Routes/AppRoutes";
 
 export const Header = () => {
     return (

@@ -1,13 +1,13 @@
 import React, {FormEvent, useEffect, useState} from "react";
 import style from './login.module.scss'
-import SuperInputText from "../../../n1-main/m1-ui/common/c1-SuperInput/SuperInputText";
-import SuperCheckbox from "../../../n1-main/m1-ui/common/c3-SuperCheckbox/SuperCheckbox";
-import SuperButton from "../../../n1-main/m1-ui/common/c2-SuperButton/SuperButton";
+import SuperInputText from "../../04-Components/common/c1-SuperInput/SuperInputText";
+import SuperCheckbox from "../../04-Components/common/c3-SuperCheckbox/SuperCheckbox";
+import SuperButton from "../../04-Components/common/c2-SuperButton/SuperButton";
 import {useSelector, useDispatch} from "react-redux";
-import {RootState} from "../../../n1-main/m2-bll/store";
-import {loginTC} from "./auth-reducer";
+import {RootState} from "../../05-Store/store";
+import {loginTC} from "../../05-Store/reducers/auth-reducer";
 import {Navigate} from "react-router-dom";
-import {initializeApp} from "../../../n1-main/m1-ui/app-reducer";
+import {initializeApp} from "../../05-Store/reducers/app-reducer";
 
 
 type LoginPropsType = {}

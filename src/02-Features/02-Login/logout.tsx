@@ -1,8 +1,8 @@
 import React from "react";
-import SuperButton from "../../../n1-main/m1-ui/common/c2-SuperButton/SuperButton";
+import SuperButton from "../../04-Components/common/c2-SuperButton/SuperButton";
 import {useDispatch, useSelector} from "react-redux";
-import {logoutTC} from "../a1-login/auth-reducer";
-import {RootState} from "../../../n1-main/m2-bll/store";
+import {logoutTC} from "../../05-Store/reducers/auth-reducer";
+import {RootState} from "../../05-Store/store";
 import {Navigate} from "react-router-dom";
 
 

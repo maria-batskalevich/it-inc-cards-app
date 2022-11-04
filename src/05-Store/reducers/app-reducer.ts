@@ -1,6 +1,6 @@
-import {setIsLoggedIn} from "../../n2-features/f1-auth/a1-login/auth-reducer";
-import {AppDispatch} from "../m2-bll/store";
-import {authAPI} from "../m3-dal/auth-api";
+import {setIsLoggedIn} from "./auth-reducer";
+import {AppDispatch} from "../store";
+import {authAPI} from "../../01-API/auth-api";
 
 const initialState = {
     isLoading: false,

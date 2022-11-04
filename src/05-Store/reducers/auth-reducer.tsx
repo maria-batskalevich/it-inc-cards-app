@@ -1,24 +1,35 @@
 import React from "react";
-import {LoginDataType, UserInfoResponseType} from "../../../n1-main/m3-dal/ApiResponseTypes";
-import {AppDispatch} from "../../../n1-main/m2-bll/store";
-import {setIsLoading, setAppInfo, setIsInitialized, setAppError} from "../../../n1-main/m1-ui/app-reducer";
-import {errorsHandler} from "../../../utils/errors";
-import {authAPI} from "../../../n1-main/m3-dal/auth-api";
+import {LoginDataType, UserDataType} from "../../01-API/ApiResponseTypes";
+import {AppDispatch} from "../store";
+import {setIsLoading, setAppInfo, setIsInitialized, setAppError} from "./app-reducer";
+import {errorsHandler} from "../../08-Utils/errors";
+import {authAPI} from "../../01-API/auth-api";
 
 
-type InitialStateType = {
-    isLoggedIn: boolean
-    info: UserInfoResponseType | null
 
+const InitialState = {
+    isLoggedIn: false,
+    user: {
+        avatar: '',
+        created: 5,
+        email: '',
+        isAdmin: false,
+        name: '',
+        publicCardPacksCount: 0,
+        rememberMe: false,
+        token: '',
+        updated: 5,
+        _id: '',
+    }
 }
 
-const InitialState: InitialStateType = {
-    isLoggedIn: false,
-    info: null,
+type AuthInitialStateType = {
+    isLoggedIn: boolean,
+    user: UserDataType | null
 }
 type authReducerActionType =
     | ReturnType<typeof setIsLoggedIn>
-    | ReturnType<typeof setUsersInfo>
+    | ReturnType<typeof setUsersData>
     | ReturnType<typeof setIsLoading>
     | ReturnType<typeof setIsInitialized>
     | ReturnType<typeof setAppInfo>
@@ -27,15 +38,15 @@ type authReducerActionType =
 
 export const authReducer = (
     state = InitialState,
-    action: authReducerActionType): InitialStateType => {
+    action: authReducerActionType): AuthInitialStateType => {
     switch (action.type) {
         case "SET-IS-LOGGED-IN":
             return {
                 ...state, isLoggedIn: action.payload.isLoggedIn
             }
-        case "SET-USERS-INFO":
+        case "SET-USERS-DATA":
             return {
-                ...state, info: action.payload
+                ...state, user: action.payload.userData
             }
 
         default:
@@ -45,15 +56,15 @@ export const authReducer = (
 
 export const setIsLoggedIn = (isLoggedIn: boolean) => (
     {type: 'SET-IS-LOGGED-IN', payload: {isLoggedIn}} as const)
-const setUsersInfo = (info: UserInfoResponseType | null) => (
-    {type: 'SET-USERS-INFO', payload: info} as const)
+const setUsersData = (userData: UserDataType | null) => (
+    {type: 'SET-USERS-DATA', payload: {userData}} as const)
 
 
 export const loginTC = (loginData: LoginDataType) => async (dispatch: AppDispatch) => {
     try {
         dispatch(setIsLoading(true))
         const response = await authAPI.login(loginData)
-        dispatch(setUsersInfo(response.data))
+        dispatch(setUsersData(response.data))
         dispatch(setIsLoggedIn(true))
         dispatch(setAppInfo(`Successful login, ${response.data.email}`))
     } catch (e) {
@@ -67,7 +78,7 @@ export const checkAuth = () => async (dispatch: AppDispatch) => {
     try {
         dispatch(setIsLoading(true))
         const res = await authAPI.auth()
-        dispatch(setUsersInfo(res.data))
+        dispatch(setUsersData(res.data))
         dispatch(setIsLoggedIn(true))
     } catch (e) {
         errorsHandler('', dispatch)
@@ -81,7 +92,7 @@ export const logoutTC = () => async (dispatch: AppDispatch) => {
         dispatch(setIsLoading(true))
         const res = await authAPI.logout()
         dispatch(setIsLoggedIn(false))
-        dispatch(setUsersInfo(null))
+        dispatch(setUsersData(null))
         dispatch(setAppInfo(res.data.info))
     } catch (e) {
         errorsHandler(e, dispatch)

@@ -1,12 +1,11 @@
 import {Route, Routes} from 'react-router-dom';
-import {Login} from "../../../n2-features/f1-auth/a1-login/Login";
-import {Registration} from "../../../n2-features/f1-auth/a2-register/Registration";
-import {Profile} from "../../../n2-features/f1-auth/a3-profile/Profile";
-import {RecoveryPassword} from "../../../n2-features/f1-auth/a4-recoveryPassword/RecoveryPassword";
-import {NotFound} from "../../../n2-features/f1-auth/a5-404/404";
-import {NewPassword} from "../../../n2-features/f1-auth/a6-newPassword/NewPassword";
-import {Demonstration} from "../../../n2-features/f1-auth/a6-demonstration/Demonstration";
-import {Logout} from "../../../n2-features/f1-auth/a7-logout/logout";
+import {Login} from "../02-Features/02-Login/Login";
+import {Registration} from "../02-Features/03-Registration/Registration";
+import {Profile} from "../02-Features/05-Profile/Profile";
+import {RecoveryPassword} from "../02-Features/04-PasswordRecovery/RecoveryPassword";
+import {NotFound} from "../08-Utils/404";
+import {NewPassword} from "../02-Features/04-PasswordRecovery/NewPassword";
+import {Logout} from "../02-Features/02-Login/logout";
 
 export const NOT_FOUND_ROUTE = '*';
 export const LOGIN_ROUTE = 'login';
@@ -16,7 +15,6 @@ export const RECOVERY_PASS_ROUTE = 'recoveryPass';
 export const NEW_PASS_ROUTE = 'newPass';
 export const PACKS_ROUTE = 'cardPacks';
 export const CARDS_ROUTE = 'cards';
-export const DEMONSTRATION_ROUTE = 'demonstration'
 export const LOGOUT_ROUTE = 'logout'
 
 export const publicRoutes = [
@@ -56,10 +54,6 @@ export const publicRoutes = [
     //     path: CARDS_ROUTE,
     //     component: <Cards/>,
     // },
-    {
-        path: DEMONSTRATION_ROUTE,
-        component: <Demonstration/>
-    }
 ];
 
 export const AppRoutes = () => (
