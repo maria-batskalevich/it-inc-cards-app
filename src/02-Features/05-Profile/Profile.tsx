@@ -17,7 +17,6 @@ export const Profile = () => {
             {
                 profileData &&   <img src={profileData} alt="" width={'200px'} height={'200px'}/>
             }
-
         </div>
     )
 }

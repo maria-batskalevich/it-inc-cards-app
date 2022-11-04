@@ -1,5 +1,5 @@
 import axios, {AxiosResponse} from 'axios';
-import {LoginDataType, LogoutResponse, UserDataResponseType} from "./ApiResponseTypes";
+import {LoginDataType, LogoutResponse, UserDataType} from "./ApiResponseTypes";
 
 
 // const settings = {
@@ -35,14 +35,14 @@ const instance = axios.create({
 
 export const authAPI = {
     login (data: LoginDataType) {
-        return instance.post<LoginDataType, AxiosResponse<UserDataResponseType>>('auth/login', data)
+        return instance.post<LoginDataType, AxiosResponse<UserDataType>>('auth/login', data)
     },
 
     logout ()  {
        return instance.delete<LogoutResponse>('auth/me')
     },
     auth () {
-        return instance.post<{}, AxiosResponse<UserDataResponseType>>('auth/me')
+        return instance.post<{}, AxiosResponse<UserDataType>>('auth/me')
     }
 }
 
