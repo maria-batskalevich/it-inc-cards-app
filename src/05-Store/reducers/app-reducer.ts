@@ -1,76 +1,60 @@
-import {setIsLoggedIn} from "./auth-reducer";
-import {AppDispatch} from "../store";
-import {authAPI} from "../../01-API/auth-api";
+import {checkAuth} from "./auth-reducer";
+import { RootState} from "../store";
+
+import {ThunkDispatch} from "redux-thunk";
+
+export type RequestStatusType = 'idle' | 'loading' | 'succeed' | 'failed'
 
 const initialState = {
-    isLoading: false,
     isInitialized: false,
-    info: '',
-    error: '',
-}
-export type InitialStateType = {
-    isLoading: boolean,
-    isInitialized: boolean,
-    info: string
-    error: string
+    appState: {
+        status: 'idle',
+        error: null as string | null,
+        info: null as string | null
+    } as AppState
 }
 
-type AppReducerActionType =
-    | ReturnType<typeof setIsLoading>
+export type AppState = {
+    status: RequestStatusType,
+    error: null | string
+    info?: string
+}
+
+export type InitialStateType = typeof initialState
+
+type ActionsType =
     | ReturnType<typeof setIsInitialized>
-    | ReturnType<typeof setAppInfo>
-    | ReturnType<typeof setAppError>
+    | ReturnType<typeof setAppStatus>
 
 
-export const appReducer = (state = initialState, action: AppReducerActionType): InitialStateType => {
+export const appReducer = (state: InitialStateType = initialState, action: ActionsType): InitialStateType => {
     switch (action.type) {
-        case "SET-IS-LOADING":
+        case "SET-APP-STATUS":
             return {
-                ...state, isLoading: action.payload.status
+                ...state, appState: action.payload.state
             }
         case "SET-IS-INITIALIZED":
             return {
-                ...state, isInitialized: action.payload.isInitialized
-            }
-        case "SET-APP-INFO":
-            return {
-                ...state, info: action.payload.info
-            }
-        case "SET-APP-ERROR":
-            return {
-                ...state, error: action.payload.error
+                ...state, isInitialized: true
             }
         default:
             return state
     }
 }
 
-export const setIsLoading = (status: boolean) => (
-    {type: 'SET-IS-LOADING', payload: {status}} as const)
+export const setAppStatus = (state: AppState) => ({
+    type: 'SET-APP-STATUS', payload: {state}
+} as const)
 
-export const setIsInitialized = (isInitialized: boolean) => (
-    {type: "SET-IS-INITIALIZED", payload: {isInitialized}} as const)
+export const setIsInitialized = () => (
+    {type: "SET-IS-INITIALIZED"} as const)
 
-export const setAppInfo = (info: string) => (
-    {type: 'SET-APP-INFO', payload: {info}} as const)
-
-export const setAppError = (error: string) => (
-    {type: 'SET-APP-ERROR', payload: {error}} as const)
-
-// export const initializeApp = () => async (dispatch: ThunkDispatch<RootStateType, unknown, AppReducerActionType>) => {
-//     try {
-//         await dispatch(checkAuth)
-//         dispatch(setIsInitialized(true))
-//     } catch (e) {
-//         const error = e.response ? e.response.data.error : (e.message + ', more details in the console')
-//     }
-// }
-
-export const initializeApp = () => (dispatch: AppDispatch) => {
-    authAPI.auth()
-        .then((res) => {
-            dispatch(setIsLoggedIn(true))})
-        .finally(() => {
-        dispatch(setIsInitialized(true))
-    })
+export const initializeApp = () => async (dispatch: ThunkDispatch<RootState, unknown, ActionsType>) => {
+    try {
+        await dispatch(checkAuth())
+        dispatch(setIsInitialized)
+    } catch (e: any) {
+        const error = e.response ? e.response.data.error : (e.message + ', more details in the console')
+        dispatch(setAppStatus({status: 'failed', error: error}))
+    }
 }
