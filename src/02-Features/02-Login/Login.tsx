@@ -7,7 +7,7 @@ import {SignForm} from "./SignForm";
 
 
 export const Login: React.FC = React.memo(() => {
-      const isLoggedIn = useSelector<RootState>(state => state.auth.isLoggedIn)
+      const isLoggedIn = useSelector<RootState, boolean>(state => state.auth.isLoggedIn)
 
     // useEffect(() => {
     //     // @ts-ignore

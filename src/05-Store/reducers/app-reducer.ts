@@ -1,9 +1,8 @@
-import {checkAuth} from "./auth-reducer";
-import { RootState} from "../store";
+import {setIsLoggedIn} from "./auth-reducer";
+import {Dispatch} from "react";
+import {authAPI} from "../../01-API/auth-api";
 
-import {ThunkDispatch} from "redux-thunk";
-
-export type RequestStatusType = 'idle' | 'loading' | 'succeed' | 'failed'
+export type RequestStatusType = 'idle' | 'loading' | 'succeeded' | 'failed'
 
 const initialState = {
     isInitialized: false,
@@ -25,6 +24,7 @@ export type InitialStateType = typeof initialState
 type ActionsType =
     | ReturnType<typeof setIsInitialized>
     | ReturnType<typeof setAppStatus>
+    | ReturnType<typeof setIsLoggedIn>
 
 
 export const appReducer = (state: InitialStateType = initialState, action: ActionsType): InitialStateType => {
@@ -49,12 +49,14 @@ export const setAppStatus = (state: AppState) => ({
 export const setIsInitialized = () => (
     {type: "SET-IS-INITIALIZED"} as const)
 
-export const initializeApp = () => async (dispatch: ThunkDispatch<RootState, unknown, ActionsType>) => {
-    try {
-        await dispatch(checkAuth())
-        dispatch(setIsInitialized)
-    } catch (e: any) {
+export const initializeApp = () => (dispatch: Dispatch<ActionsType>) => {
+    dispatch(setAppStatus({status: 'loading', error: null}))
+    authAPI.me()
+        .then(() => {
+            dispatch(setIsLoggedIn(true))
+            dispatch(setAppStatus({status: 'succeeded', error: null}))
+        }).catch((e: any) => {
         const error = e.response ? e.response.data.error : (e.message + ', more details in the console')
         dispatch(setAppStatus({status: 'failed', error: error}))
-    }
+    })
 }

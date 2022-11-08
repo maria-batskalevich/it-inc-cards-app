@@ -15,10 +15,11 @@ export const authAPI = {
     logout ()  {
        return instance.delete<LogoutResponse>('auth/me')
     },
-    auth () {
+    me () {
         return instance.post<UserDataType>('auth/me')
     }
 }
+
 
 
 
