@@ -1,4 +1,4 @@
-import React, {FormEvent} from "react";
+import React from "react";
 import {useFormik} from "formik";
 import style from "./login.module.scss";
 import s from './signForm.module.scss'
