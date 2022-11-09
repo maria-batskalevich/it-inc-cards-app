@@ -9,11 +9,6 @@ import {SignForm} from "./SignForm";
 export const Login: React.FC = React.memo(() => {
       const isLoggedIn = useSelector<RootState, boolean>(state => state.auth.isLoggedIn)
 
-    // useEffect(() => {
-    //     // @ts-ignore
-    //     dispatch(initializeApp())
-    // }, [dispatch])
-
     if (isLoggedIn) return <Navigate to={'/profile'}/>
 
     return (

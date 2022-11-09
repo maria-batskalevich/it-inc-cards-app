@@ -37,7 +37,6 @@ export const SignForm = () => {
         onSubmit: values => {
             // @ts-ignore
             dispatch(loginTC(values))
-            formik.resetForm()
         },
     });
 

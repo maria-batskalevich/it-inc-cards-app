@@ -1,6 +1,7 @@
-import React, {Dispatch} from "react";
+import React from "react";
+import {Dispatch} from 'redux'
 import {LoginDataType, UserDataType} from "../../01-API/ApiResponseTypes";
-import {setAppStatus} from "./app-reducer";
+import {setAppStatus, setIsInitialized} from "./app-reducer";
 import {authAPI} from "../../01-API/auth-api";
 import {AppDispatch} from "../store";
 
@@ -48,7 +49,7 @@ export const authReducer = (
 
 export const setIsLoggedIn = (isLoggedIn: boolean) => (
     {type: 'SET-IS-LOGGED-IN', payload: {isLoggedIn}} as const)
-const setUsersData = (userData: UserDataType | null) => (
+export const setUsersData = (userData: UserDataType | null) => (
     {type: 'SET-USERS-DATA', payload: userData} as const)
 
 
@@ -78,13 +79,14 @@ export const loginTC = (loginData: LoginDataType) => async (dispatch: AppDispatc
 //     }
 // }
 
-export const logoutTC = () => async (dispatch: Dispatch<ActionsType>) => {
-    try {
-        await authAPI.logout()
-        dispatch(setIsLoggedIn(false))
-        dispatch(setUsersData(null))
-    } catch (e: any) {
-        const error = e.response ? e.response.data.error : (e.message + ', more details in the console')
-        dispatch(setAppStatus({status: 'failed', error: error}))
-    }
-}
+// export const logoutTC = () => async (dispatch: Dispatch) => {
+//     try {
+//         await authAPI.logout()
+//         dispatch(setIsLoggedIn(false))
+//         dispatch(setUsersData(null))
+//     } catch (e: any) {
+//         const error = e.response ? e.response.data.error : (e.message + ', more details in the console')
+//         dispatch(setAppStatus({status: 'failed', error: error}))
+//     }
+// }
+
