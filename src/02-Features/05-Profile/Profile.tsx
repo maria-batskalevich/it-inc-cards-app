@@ -1,23 +1,23 @@
-import React, {useEffect} from "react";
+import React from "react";
+// @ts-ignore
 import style from "../02-Login/login.module.scss";
-import {TypedUseSelectorHook, useDispatch, useSelector} from "react-redux";
-import {RootState} from "../../05-Store/store";
+import {TypedUseSelectorHook, useSelector} from "react-redux";
+import {RootStateType} from "../../00-App/store";
 import {Navigate} from "react-router-dom";
-import {initializeApp} from "../../05-Store/reducers/app-reducer";
+
 
 export const Profile = () => {
-    const useTypedSelector: TypedUseSelectorHook<RootState> = useSelector
-    const dispatch = useDispatch()
-    const profileData = useTypedSelector(state => state.auth.user.avatar)
-    const isLoggedIn = useSelector<RootState, boolean>(state => state.auth.isLoggedIn)
+    const useTypedSelector: TypedUseSelectorHook<RootStateType> = useSelector
+    const profileData = useTypedSelector(state => state.auth.avatar)
+    const userName = useSelector<RootStateType, string>(state => state.auth.name)
 
-    if(!isLoggedIn) return <Navigate to={'/login'}/>
+    if (!userName) return <Navigate to={'/login'}/>
 
     return (
         <div className={style.container}>
             <h3>Personal Information</h3>
             {
-                profileData &&   <img src={profileData} alt="" width={'200px'} height={'200px'}/>
+                profileData && <img src={profileData} alt="" width={'200px'} height={'200px'}/>
             }
         </div>
     )

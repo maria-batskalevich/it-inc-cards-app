@@ -1,15 +1,16 @@
 import React from "react";
+// @ts-ignore
 import style from './login.module.scss'
 import {useSelector} from "react-redux";
-import {RootState} from "../../05-Store/store";
+import {RootStateType} from "../../00-App/store";
 import {Navigate} from "react-router-dom";
-import {SignForm} from "./SignForm";
+import {SignForm} from "./SignForm/SignForm";
 
 
 export const Login: React.FC = React.memo(() => {
-      const isLoggedIn = useSelector<RootState, boolean>(state => state.auth.isLoggedIn)
+    const userName = useSelector<RootStateType, string>(state => state.auth.name)
 
-    if (isLoggedIn) return <Navigate to={'/profile'}/>
+    if (userName) return <Navigate to={'/profile'}/>
 
     return (
         <div className={style.container}>
@@ -17,7 +18,7 @@ export const Login: React.FC = React.memo(() => {
             <span>{'Email: nya-admin@nya.nya Password: 1qazxcvBG'}</span>
             <SignForm/>
             <p>Already have an account?</p>
-            <a href="" className={style.signUp}>Sign Up</a>
+            {/*<a className={style.signUp}>Sign Up</a>*/}
         </div>
     )
 })

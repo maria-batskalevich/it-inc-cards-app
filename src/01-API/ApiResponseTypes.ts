@@ -8,12 +8,12 @@ export type LoginDataType = {
     password: string,
     rememberMe: boolean
 }
-export type LogoutResponse = {
+export type LogoutResponseType = {
     info: string,
-    error: string
+    error?: string
 }
 
-export type UserDataType = {
+export type AuthMeResponseType = {
     avatar: string,
     create?: number,
     email: string,
@@ -24,4 +24,13 @@ export type UserDataType = {
     token: string,
     updated: number,
     _id: string,
+}
+
+export type RegistrationResponseType = {
+    addedUser: {}
+    error?: string
+}
+export type RegistrationParamsType = {
+    email: string,
+    password: string
 }

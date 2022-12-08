@@ -1,10 +1,12 @@
 import React from "react";
 import {useFormik} from "formik";
-import style from "./login.module.scss";
+// @ts-ignore
+import style from "../login.module.scss";
+// @ts-ignore
 import s from './signForm.module.scss'
-import SuperCheckbox from "../../04-Components/common/c3-SuperCheckbox/SuperCheckbox";
-import SuperButton from "../../04-Components/common/c2-SuperButton/SuperButton";
-import {loginTC} from "../../05-Store/reducers/auth-reducer";
+import SuperCheckbox from "../../../04-Components/common/c3-SuperCheckbox/SuperCheckbox";
+import SuperButton from "../../../04-Components/common/c2-SuperButton/SuperButton";
+import {loginTC} from "../../auth-reducer";
 import {useDispatch} from "react-redux";
 
 type FormikErrorType = {
@@ -65,7 +67,7 @@ export const SignForm = () => {
                 <span>Remember me</span>
             </div>
             <div className={style.forgotPass}>
-                <a href="">Forgot password?</a>
+                {/*<a href="#">Forgot password?</a>*/}
             </div>
             <SuperButton type={'submit'}>Sign in</SuperButton>
         </form>

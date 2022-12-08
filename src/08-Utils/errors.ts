@@ -1,7 +1,14 @@
-import {setAppError} from "../05-Store/reducers/app-reducer";
-import {AppDispatch} from "../05-Store/store";
+import {Dispatch} from 'redux';
+import axios, {AxiosError} from 'axios';
+import {setAppError} from "../00-App/app-reducer";
 
 
-export const errorsHandler = (error: any, dispatch: AppDispatch) => {
-    dispatch(setAppError(error.response ? error.response.data.error : error))
+export const errorUtils = (e: Error | AxiosError<{ error: string }>, dispatch: Dispatch<ReturnType<typeof setAppError>>) => {
+    if (axios.isAxiosError(e)) {
+        const err = e as AxiosError<{ error: string }>
+        const error = err.response?.data ? err.response.data.error : err.message
+        dispatch(setAppError(error))
+    } else {
+        dispatch(setAppError(`Native error ${e.message}`))
+    }
 }

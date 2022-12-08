@@ -1,16 +1,16 @@
 import React from "react";
 import SuperButton from "../../04-Components/common/c2-SuperButton/SuperButton";
-import {useDispatch, useSelector} from "react-redux";
-import {logoutTC} from "../../05-Store/reducers/auth-reducer";
-import {RootState} from "../../05-Store/store";
+import {useSelector} from "react-redux";
+import {RootStateType} from "../../00-App/store";
 import {Navigate} from "react-router-dom";
+import {logoutTC} from "../auth-reducer";
+import {useAppDispatch} from "../../07-Hooks/hooks";
 
 
 export const Logout = () => {
-    const isLoggedIn = useSelector<RootState>(state => state.auth.isLoggedIn)
-    const dispatch = useDispatch()
+    const isLoggedIn = useSelector<RootStateType>(state => state.auth.name)
+    const dispatch = useAppDispatch()
     const logoutHandler = () => {
-        // @ts-ignore
         dispatch(logoutTC())
     }
     if (!isLoggedIn) return <Navigate to={'/login'}/>

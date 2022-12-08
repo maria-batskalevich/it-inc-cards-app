@@ -1,23 +1,32 @@
 import axios from 'axios';
-import {LoginDataType, LogoutResponse, UserDataType} from "./ApiResponseTypes";
+import {
+    LoginDataType,
+    LogoutResponseType,
+    AuthMeResponseType,
+    RegistrationParamsType
+} from "./ApiResponseTypes";
 
 const instance = axios.create({
-    baseURL: 'http://localhost:7542/2.0/',
+    baseURL: process.env.REACT_APP_BACK_URL || 'http://localhost:7542/2.0/' ,
+    // baseURL: 'http://localhost:7542/2.0/',
     // baseURL: 'https://neko-back.herokuapp.com/2.0',
     withCredentials: true,
 })
 
 export const authAPI = {
-    login (data: LoginDataType) {
-        return instance.post<UserDataType>('auth/login', data)
+    me() {
+        return instance.post<AuthMeResponseType>('auth/me')
     },
-
-    logout ()  {
-       return instance.delete<LogoutResponse>('auth/me')
+    login(data: LoginDataType) {
+        return instance.post<AuthMeResponseType>('auth/login', data)
     },
-    me () {
-        return instance.post<UserDataType>('auth/me')
+    logout() {
+        return instance.delete<LogoutResponseType>('auth/me')
+    },
+    registration(data: RegistrationParamsType) {
+        return instance.post<AuthMeResponseType>('auth/register', data)
     }
+
 }
 
 

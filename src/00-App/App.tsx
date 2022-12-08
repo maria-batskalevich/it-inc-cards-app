@@ -4,19 +4,19 @@ import {HashRouter} from 'react-router-dom';
 import {Header} from "../02-Features/01-Header/Header";
 import {AppRoutes} from "../06-Routes/AppRoutes";
 import {useDispatch, useSelector} from "react-redux";
-import {initializeApp} from "../05-Store/reducers/app-reducer";
-import {RootState} from "../05-Store/store";
+import {RootStateType} from "./store";
 import {Loader} from "../04-Components/common/c4-Loadrer-Spinner/Loader";
+import {authMeTC} from "../02-Features/auth-reducer";
 
 
 export const App: React.FC = () => {
     const dispatch = useDispatch()
-    const status = useSelector<RootState, string>(state=> state.app.appState.status)
-    const isInitialized = useSelector<RootState, boolean>(state=> state.app.isInitialized)
+    // const status = useSelector<RootStateType, string>(state=> state.app.status)
+    const isInitialized = useSelector<RootStateType, boolean>(state=> state.app.isInitialized)
     useEffect(() => {
         // @ts-ignore
-        dispatch(initializeApp())
-    }, [])
+        dispatch(authMeTC())
+    }, [dispatch])
 
     if (!isInitialized) {
         return <div
