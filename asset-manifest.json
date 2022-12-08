@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/it-inc-cards-app/static/css/main.c6b6d9e1.css",
-    "main.js": "/it-inc-cards-app/static/js/main.44944e4f.js",
+    "main.css": "/it-inc-cards-app/static/css/main.db9899a7.css",
+    "main.js": "/it-inc-cards-app/static/js/main.d03cc1b2.js",
     "static/js/787.77c3275d.chunk.js": "/it-inc-cards-app/static/js/787.77c3275d.chunk.js",
     "index.html": "/it-inc-cards-app/index.html",
-    "main.c6b6d9e1.css.map": "/it-inc-cards-app/static/css/main.c6b6d9e1.css.map",
-    "main.44944e4f.js.map": "/it-inc-cards-app/static/js/main.44944e4f.js.map",
+    "main.db9899a7.css.map": "/it-inc-cards-app/static/css/main.db9899a7.css.map",
+    "main.d03cc1b2.js.map": "/it-inc-cards-app/static/js/main.d03cc1b2.js.map",
     "787.77c3275d.chunk.js.map": "/it-inc-cards-app/static/js/787.77c3275d.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.c6b6d9e1.css",
-    "static/js/main.44944e4f.js"
+    "static/css/main.db9899a7.css",
+    "static/js/main.d03cc1b2.js"
   ]
 }
