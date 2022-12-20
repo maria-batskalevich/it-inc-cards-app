@@ -16,9 +16,11 @@ export const RegistrationReducer = (state: initialStateType = initialState, acti
     }
 }
 
-const RegistrAC = (param: string) => (
-    {type: "REGISTRATION_CASE", payload: {param}} as const
+export const registrationAC = (isRegistered: boolean) => (
+    {type: "REGISTRATION_CASE", payload: {isRegistered}} as const
 )
-type RegistrACType = ReturnType<typeof RegistrAC>
+type RegistrationACType = ReturnType<typeof registrationAC>
 
-type ActionType = RegistrACType
+type ActionType = RegistrationACType
+
+

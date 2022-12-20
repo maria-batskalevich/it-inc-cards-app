@@ -16,6 +16,5 @@ root.render(
         </Provider>
     </React.StrictMode>
 );
-console.log(process.env)
-console.log(process.env.REACT_APP_BACK_URL)
+
 reportWebVitals();

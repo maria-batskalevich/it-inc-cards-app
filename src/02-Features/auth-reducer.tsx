@@ -3,6 +3,7 @@ import {setAppIsInitialized, setAppStatus, setAppSuccess} from "../00-App/app-re
 import {authAPI} from "../01-API/auth-api";
 import {RootThunkType} from "../00-App/store";
 import {errorUtils} from "../08-Utils/errors";
+import {registrationAC} from "./03-Registration/registrationReducer";
 
 const InitialState = {
     _id: '' as string | undefined,
@@ -70,6 +71,13 @@ export const loginTC = (data: LoginDataType): RootThunkType => async (dispatch) 
     }
 }
 
+// export const loginTCC = (data: LoginDataType): RootThunkType => async (dispatch) => {
+//     dispatch(setAppStatus('loading'))
+//     try {
+//         let res = await authAPI.login(data)
+//         dispatch(setLoginData(res.data))
+//     }
+// }
 // export const checkAuth = () => async (dispatch: Dispatch<any>) => {
 //     dispatch(setAppStatus({status: 'loading', error: null}))
 //     try {
@@ -99,16 +107,15 @@ export const registrationTC = (data: RegistrationParamsType): RootThunkType => a
     dispatch(setAppStatus('loading'))
     try {
         await authAPI.registration(data)
+        alert(data)
+        dispatch(registrationAC(true))
         dispatch(setAppSuccess('Registration successfully completed!'))
         dispatch(setAppStatus('succeeded'))
-        // return true
     } catch (e: any) {
         dispatch(setAppStatus('failed'))
         errorUtils(e, dispatch)
-        return false
     }
-        finally {
+    finally {
         dispatch(setAppStatus('idle'))
     }
 }
-

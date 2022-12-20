@@ -15,7 +15,7 @@ type FormikErrorType = {
     rememberMe?: boolean
 }
 
-export const SignForm = () => {
+export const SignInForm = () => {
     const dispatch = useDispatch()
     const formik = useFormik({
         initialValues: {
@@ -31,7 +31,7 @@ export const SignForm = () => {
                 errors.email = 'Invalid email address';
             } else if (!values.password) {
                 errors.password = 'Required';
-            } else if (values.password.length < 2) {
+            } else if (values.password.length <= 3) {
                 errors.password = 'Must be more than 3 characters';
             }
             return errors;

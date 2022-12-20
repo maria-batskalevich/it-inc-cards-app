@@ -7,24 +7,25 @@ import {registrationTC} from "../../auth-reducer";
 import {useAppDispatch} from "../../../07-Hooks/hooks";
 
 type FormikErrorType = {
-    email: string
-    password: string
-    confirmPassword: string
+    email?: string
+    password?: string
+    confirmPassword?: string
 }
 
-export const SignForm = () => {
+export const SignUpForm = () => {
     const dispatch = useAppDispatch()
     const formik = useFormik({
         initialValues: {
             email: '',
             password: '',
+            confirmPassword: "",
         },
         validate: values => {
-            const errors: FormikErrorType = {
-                email: "",
-                password: "",
-                confirmPassword: ""
-            };
+            const errors: FormikErrorType = {}
+            //     email: "",
+            //     password: "",
+            //     confirmPassword: ""
+            // };
             if (!values.email) {
                 errors.email = 'Required';
             } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
@@ -38,6 +39,7 @@ export const SignForm = () => {
         },
         onSubmit: values => {
             dispatch(registrationTC(values))
+
         },
     });
 
@@ -59,14 +61,12 @@ export const SignForm = () => {
                    {...formik.getFieldProps('password')}/>
             <input className={s.someInput}
                    type="text"
-                   placeholder='Password'
-                   {...formik.getFieldProps('password')}/>
+                   placeholder='Confirm password'
+                   {...formik.getFieldProps('conformPassword')}/>
 
             {formik.touched.password
             && formik.errors.password
             && <div style={{color: 'red'}}>{formik.errors.password}</div>}
-
-
             <SuperButton type={'submit'}>Sign up</SuperButton>
         </form>
     )

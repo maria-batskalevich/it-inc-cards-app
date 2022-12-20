@@ -4,7 +4,7 @@ import style from './login.module.scss'
 import {useSelector} from "react-redux";
 import {RootStateType} from "../../00-App/store";
 import {Navigate} from "react-router-dom";
-import {SignForm} from "./SignForm/SignForm";
+import {SignInForm} from "./SignInForm/SignInForm";
 
 
 export const Login: React.FC = React.memo(() => {
@@ -16,7 +16,7 @@ export const Login: React.FC = React.memo(() => {
         <div className={style.container}>
             <h3>Sign in</h3>
             <span>{'Email: nya-admin@nya.nya Password: 1qazxcvBG'}</span>
-            <SignForm/>
+            <SignInForm/>
             <p>Already have an account?</p>
             {/*<a className={style.signUp}>Sign Up</a>*/}
         </div>
